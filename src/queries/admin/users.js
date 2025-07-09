@@ -34,7 +34,7 @@ export default {
 
     const { data, error } = await supabase
       .from("users")
-      .select("id, name, nisn, jurusan, vote_status", {
+      .select("id, name, nisn, jurusan, has_voted", {
         count: "exact",
         signal, // untuk abort controller
       })
@@ -51,7 +51,7 @@ export default {
 
     const { data, error } = await supabase
       .from("users")
-      .select("id, name, level", {
+      .select("id, name, level, token", {
         count: "exact",
         signal, // untuk abort controller
       })
@@ -61,6 +61,19 @@ export default {
 
     if (error) return [];
 
+    return data;
+  },
+
+  async getUserByToken(token) {
+    const { data, error } = await supabase
+      .from("users")
+      .select("id, name, nisn, token, has_voted")
+      .eq("token", token)
+      .single();
+
+    console.log(data, error);
+
+    if (error) return [];
     return data;
   },
 
@@ -108,9 +121,13 @@ export default {
   async getAllCandidates() {
     const { data } = await supabase
       .from("candidates")
-      .select("id, paslon, nama_ketua, nama_wakil, thumbnail_url, total_vote", {
-        count: "exact",
-      })
+      .select(
+        "id, paslon, nama_ketua, nama_wakil, thumbnail_url, total_vote, level",
+
+        {
+          count: "exact",
+        },
+      )
       .order("paslon", { ascending: true });
     return data;
   },

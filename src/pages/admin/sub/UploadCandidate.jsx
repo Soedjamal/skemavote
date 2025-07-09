@@ -31,10 +31,10 @@ const UploadCandidate = () => {
           ]}
         />
 
-        <div className="flex flex-col mt-5">
+        <div className="flex flex-col mt-5 w-full max-w-lg">
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-3 mt-6 w-fit"
+            className="flex flex-col gap-3 mt-6 w-full"
           >
             <label htmlFor="nama_ketua" className="flex flex-col gap-2">
               Nama Ketua
@@ -44,8 +44,7 @@ const UploadCandidate = () => {
                 name="nama_ketua"
                 value={formData.nama_ketua}
                 placeholder="Masukkan Nama Ketua"
-                className="input input-bordered w-full max-w-xs"
-                required
+                className="input input-bordered w-full "
               />
             </label>
 
@@ -57,7 +56,7 @@ const UploadCandidate = () => {
                 name="nama_wakil"
                 value={formData.nama_wakil}
                 placeholder="Masukkan Nama Wakil Ketua"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full "
               />
             </label>
 
@@ -70,8 +69,24 @@ const UploadCandidate = () => {
                 name="paslon"
                 value={formData.paslon}
                 placeholder="Masukkan Nomor Urut Paslon"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full "
               />
+            </label>
+
+            <label htmlFor="nama_wakil" className="flex flex-col gap-2">
+              Level Paslon
+              <select
+                name="level"
+                onChange={handleChange}
+                value={formData.level}
+                className="select select-bordered w-full "
+              >
+                <option disabled value="" defaultChecked>
+                  Pilih level
+                </option>
+                <option value="teacher">Guru</option>
+                <option value="student">Murid</option>
+              </select>
             </label>
 
             <label htmlFor="thumbnail_url" className="flex flex-col gap-2">
@@ -81,7 +96,7 @@ const UploadCandidate = () => {
                 onChange={handleThumbnailSelect}
                 type="file"
                 name="thumbnail_url"
-                className="file-input file-input-bordered w-full max-w-xs"
+                className="file-input file-input-bordered w-full"
               />
             </label>
 

@@ -16,9 +16,9 @@ const Modal = ({
   inputStyle = "input input-bordered",
   inputAcc = ".xlsx, .xls",
   selectedLevel,
-  submitFn,
+  submitFn = null,
   submitTitle = "Submit",
-
+  submitBtn = "btn-success",
   onClick,
 }) => {
   const modalRef = useRef(null);
@@ -103,7 +103,7 @@ const Modal = ({
               )}
               <button
                 type="submit"
-                className="btn btn-success"
+                className={`btn ${submitBtn}`}
                 onClick={onClick}
               >
                 {submitTitle}

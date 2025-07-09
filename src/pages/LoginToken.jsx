@@ -1,30 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useEvents } from "../service/admin/useEvents";
-import { MailWarning } from "lucide-react";
+import { MailWarning, School, Timer } from "lucide-react";
+import { useEventList } from "../service/public/useActiveEvent";
+import { useVoting } from "../service/public/useVoting";
 
 const LoginToken = () => {
   const [token, setToken] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
-  const { events } = useEvents();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError("");
-
-    // Simulasi validasi token
-    setTimeout(() => {
-      if (token === "TXT1256") {
-        navigate("/pemilihan");
-      } else {
-        setError("Token tidak valid. Silakan coba lagi.");
-      }
-      setIsLoading(false);
-    }, 1500);
-  };
+  const { activeEvent } = useEventList();
+  const { getUserByToken, isLoading, error } = useVoting();
 
   return (
     <div
@@ -35,7 +19,7 @@ const LoginToken = () => {
       <div className="relative w-full max-w-lg flex justify-center">
         <div className="w-full max-w-lg rounded-xl overflow-hidden shadow-lg mb-4">
           <img
-            src={events[0]?.banner}
+            src={activeEvent?.banner}
             alt="Banner Acara Pemilihan"
             className="w-full h-48 object-cover"
           />
@@ -44,28 +28,36 @@ const LoginToken = () => {
 
       {/* Card Utama */}
       <div className="card  w-full max-w-lg bg-base-100 shadow-xl mb-12">
-        <div className="w-full flex justify-center mt-4">
-          <div className=" w-28 h-28 rounded-full bg-neutral-50 shadow-xl"></div>
-        </div>
+        {/* <div className="w-full flex justify-center mt-4"> */}
+        {/*   <div className=" w-28 h-28 rounded-full bg-neutral-50 shadow-xl"></div> */}
+        {/* </div> */}
         <div className="w-full max-w-lg flex justify-center mt-4">
-          <div className="card-body max-w-md">
+          <div className="card-body max-w-md ">
             {/* Judul Acara */}
-            <h1 className="card-title text-3xl max-w-md font-bold text-center mb-2 text-neutral-500">
-              {events[0]?.title}
-            </h1>
-            <h2 className="text-xl font-semibold text-center mb-6 text-neutral-400">
-              {events[0]?.sub_heading}
-            </h2>
+            <div className="leading-5">
+              <h1 className="card-title leading-8 text-3xl max-w-md font-[500]   text-neutral-600">
+                {activeEvent?.title}
+              </h1>
+              <h2 className="text-lg flex items-start gap-2 py-1 font-semibold  text-neutral-400">
+                <School size={20} /> {activeEvent?.main_heading}
+              </h2>
+              <h2 className="text- flex items-start gap-1 mb-6 text-neutral-400">
+                <Timer size={18} /> {activeEvent?.sub_heading}
+              </h2>
+            </div>
 
             {/* Form Token */}
-            <form className="max-w-md" onSubmit={handleSubmit}>
+            <form
+              className="max-w-md"
+              onSubmit={(e) => getUserByToken(e, token, activeEvent?.id)}
+            >
               <div className="form-control w-full">
                 <label className="label">
                   <span className="label-text">Masukkan Token Anda</span>
                 </label>
                 <input
-                  type="password"
-                  placeholder="Contoh: 123456"
+                  type="text"
+                  placeholder="Contoh: XYZ456"
                   className="input input-bordered w-full"
                   value={token}
                   onChange={(e) => setToken(e.target.value)}

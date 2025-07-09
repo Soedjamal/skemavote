@@ -59,6 +59,34 @@ export default {
     return data;
   },
 
+  async getActiveEvent() {
+    const { data } = await supabase
+      .from("voting")
+      .select(
+        "id, title, main_heading, sub_heading, description, banner, voting_start, voting_end, status",
+        {
+          count: "exact",
+        },
+      )
+      .eq("status", true)
+      .single();
+    return data;
+  },
+
+  async getEventByIdAndDateTime(time, id) {
+    const { data, error } = await supabase
+      .from("voting")
+      .select("voting_start, voting_end")
+      .eq("id", id)
+      .gt("voting_start", time)
+      .order("voting_start", { ascending: true })
+      .limit(1)
+      .single();
+
+    if (error) return null;
+    return data;
+  },
+
   async deleteEventById(id) {
     const { data, error } = await supabase.from("voting").delete().eq("id", id);
 

@@ -31,10 +31,10 @@ const UploadEvent = () => {
           ]}
         />
 
-        <div className="flex gap-10 mt-5 h-fit">
+        <div className="flex gap-10 mt-5 h-fit w-full max-w-lg">
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col gap-3 mt-6 max-w-1/4"
+            className="flex flex-col gap-3 mt-6 w-full"
           >
             <label htmlFor="title" className="flex flex-col gap-2">
               Judul Acara
@@ -44,8 +44,7 @@ const UploadEvent = () => {
                 name="title"
                 value={formData.title}
                 placeholder="Masukkan Judul Acara"
-                className="input input-bordered w-full max-w-xs"
-                required
+                className="input input-bordered w-full"
               />
             </label>
 
@@ -56,7 +55,7 @@ const UploadEvent = () => {
                 type="text"
                 name="main_heading"
                 value={formData.main_heading}
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full"
               />
             </label>
 
@@ -67,7 +66,7 @@ const UploadEvent = () => {
                 type="text"
                 name="sub_heading"
                 value={formData.sub_heading}
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full "
               />
             </label>
 
@@ -78,7 +77,7 @@ const UploadEvent = () => {
                 type="text"
                 name="description"
                 value={formData.description}
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full "
               />
             </label>
 
@@ -89,7 +88,7 @@ const UploadEvent = () => {
                 onChange={handleChange}
                 type="datetime-local"
                 name="voting_start"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full"
               />
             </label>
 
@@ -100,7 +99,7 @@ const UploadEvent = () => {
                 onChange={handleChange}
                 type="datetime-local"
                 name="voting_end"
-                className="input input-bordered w-full max-w-xs"
+                className="input input-bordered w-full "
               />
             </label>
 
@@ -111,7 +110,7 @@ const UploadEvent = () => {
                 onChange={handleThumbnailSelect}
                 type="file"
                 name="thumbnail_url"
-                className="file-input file-input-bordered w-full max-w-xs"
+                className="file-input file-input-bordered w-full "
               />
             </label>
 

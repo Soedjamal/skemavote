@@ -8,6 +8,7 @@ export const useCandidates = () => {
     nama_wakil: "",
     thumbnail_url: "",
     paslon: "",
+    level: "",
   });
   const [selectedFile, setSelectedFile] = useState(null); // <-- untuk file gambar
 
@@ -75,6 +76,7 @@ export const useCandidates = () => {
         nama_wakil: formData.nama_wakil.trim(),
         thumbnail_url: imageUrl,
         paslon: parseInt(formData.paslon.trim()),
+        level: formData.level.trim(),
       };
 
       await usersQueries.insertCandidate(dataToInsert);

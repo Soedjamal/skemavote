@@ -18,12 +18,18 @@ export const useEvents = () => {
   const [loading, setLoading] = useState(false);
 
   const [events, setEvents] = useState([]);
+  const [activeEvent, setActiveEvent] = useState([]);
 
   const { id } = useParams();
 
   const getAllEvents = async () => {
     const result = await eventsQueries.getAllEvents();
     setEvents(result);
+  };
+
+  const getActiveEvent = async () => {
+    const result = await eventsQueries.getActiveEvent();
+    setActiveEvent(result);
   };
 
   const getEventById = useCallback(async () => {
@@ -174,6 +180,8 @@ export const useEvents = () => {
     setFormData,
     deleteEventById,
     getEventById,
+    getActiveEvent,
+    activeEvent,
     formData,
     loading,
     events,

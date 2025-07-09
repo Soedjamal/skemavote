@@ -14,6 +14,7 @@ const SuccessVote = () => {
       setCountdown((prev) => {
         if (prev <= 1) {
           clearInterval(timer);
+          localStorage.removeItem("user");
           navigate("/");
           return 0;
         }

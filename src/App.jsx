@@ -16,6 +16,7 @@ import UploadEvent from "./pages/admin/sub/UploadEvent";
 import EditEvent from "./pages/admin/sub/EditEvent";
 import LoginToken from "./pages/LoginToken";
 import SuccessVote from "./pages/SuccessVote";
+import ProtectedVoting from "./middlewares/ProtectedVoting";
 
 const App = () => {
   return (
@@ -24,8 +25,12 @@ const App = () => {
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/" element={<LoginToken />} />
-          <Route path="/vote" element={<Vote />} />
-          <Route path="/success-vote/" element={<SuccessVote />} />
+
+          <Route element={<ProtectedVoting />}>
+            <Route path="/vote" element={<Vote />} />
+            <Route path="/success-vote/" element={<SuccessVote />} />
+          </Route>
+
           <Route path="/*" element={<NotFound />} />
 
           {/* Auth */}
